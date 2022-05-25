@@ -1,3 +1,5 @@
+use std::fmt::Display;
+use std::num::NonZeroU8;
 use crate::states::{GameOn, GameOver};
 
 pub fn set_panic_hook() {
@@ -13,9 +15,32 @@ pub fn set_panic_hook() {
 
 /// A numerical type which can hold the length of a list of compatible words
 pub type SizeList = u16;
+pub type WordSize = u8;
+pub type InputType = NonZeroU8;
+
+pub enum CompFlag {
+    Match,
+    NotPresent,
+    WrongPosition,
+    /// Same representation as not present, but the letter in this position was
+    /// present in the guess more times than in the target
+    WrongPositionOverflow,
+}
+
+impl CompFlag {
+    pub fn to_symbol(&self) -> char {
+        match self {
+            CompFlag::Match => {'+'}
+            CompFlag::NotPresent | CompFlag::WrongPositionOverflow => {'/'}
+            CompFlag::WrongPosition => {'|'}
+        }
+    }
+}
 
 pub enum GuessRet {
-    Guessed {ret: Vec<u8>, compat: SizeList, state: GameOn},
+    Attempt {ret: Vec<char>, compat: SizeList, state: GameOn},
     NotPresent (GameOn),
     GameFail (GameOver),
+    GameWon (GameOver),
 }
+

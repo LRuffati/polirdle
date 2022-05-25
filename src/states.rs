@@ -1,4 +1,4 @@
-use crate::utils::GuessRet;
+use crate::utils::{GuessRet, InputType, WordSize};
 
 /**
 In this file I will define the states of the application and the exposed functionalities
@@ -11,7 +11,7 @@ pub struct Init {
 }
 
 impl Init {
-    pub fn set_length(self, len: u8) -> WordCollectorInit {
+    pub fn set_length(self, len: WordSize) -> WordCollectorInit {
         todo!()
     }
 
@@ -23,7 +23,7 @@ struct WordCollectorInit {
 }
 
 impl WordCollectorInit {
-    pub fn add_word(&mut self, word: Vec<u8>) {
+    pub fn add_word(&mut self, word: Vec<InputType>) {
         todo!()
     }
 
@@ -36,7 +36,7 @@ impl WordCollectorInit {
 struct GameSetWord {}
 
 impl GameSetWord {
-    pub fn set_target(self, target: Vec<u8>) -> GameSetTries {
+    pub fn set_target(self, target: Vec<InputType>) -> GameSetTries {
         todo!()
     }
 }
@@ -54,7 +54,7 @@ impl GameSetTries {
 pub struct GameOn {}
 
 impl GameOn {
-    pub fn guess(self, guess: Vec<u8>) -> GuessRet {
+    pub fn guess(self, guess: Vec<InputType>) -> GuessRet {
         todo!()
     }
 
@@ -67,7 +67,7 @@ impl GameOn {
 struct InsertDuringGame {}
 
 impl InsertDuringGame {
-    pub fn insert(&mut self, word: Vec<u8>) {
+    pub fn insert(&mut self, word: Vec<InputType>) {
         todo!()
     }
 
@@ -97,7 +97,7 @@ impl GameOver {
 struct InsertOutsideGame {}
 
 impl InsertOutsideGame {
-    pub fn insert(&mut self, word: Vec<u8>){
+    pub fn insert(&mut self, word: Vec<InputType>){
         todo!()
     }
 
