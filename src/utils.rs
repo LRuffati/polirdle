@@ -1,23 +1,12 @@
-use std::fmt::Display;
 use std::num::NonZeroU8;
 use crate::states::{GameOn, GameOver};
-
-pub fn set_panic_hook() {
-    // When the `console_error_panic_hook` feature is enabled, we can call the
-    // `set_panic_hook` function at least once during initialization, and then
-    // we will get better error messages if our code ever panics.
-    //
-    // For more details see
-    // https://github.com/rustwasm/console_error_panic_hook#readme
-    #[cfg(feature = "console_error_panic_hook")]
-    console_error_panic_hook::set_once();
-}
 
 /// A numerical type which can hold the length of a list of compatible words
 pub type SizeList = u16;
 pub type WordSize = u8;
 pub type InputType = NonZeroU8;
 
+#[derive(Eq, PartialEq)]
 pub enum CompFlag {
     Match,
     NotPresent,
@@ -34,6 +23,10 @@ impl CompFlag {
             CompFlag::NotPresent | CompFlag::WrongPositionOverflow => {'/'}
             CompFlag::WrongPosition => {'|'}
         }
+    }
+
+    pub fn vec_to_res(vec: &Vec<Self>) -> String {
+        vec.iter().map(|r| r.to_symbol()).collect()
     }
 }
 
